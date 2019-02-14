@@ -18,9 +18,10 @@
 
      <!-- Styles -->
      <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
+   <!-- <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet"> -->
     <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css" rel="stylesheet">
-    <!-- data table que despliega opciones https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css-->
+    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+    
 </head>
 <body>
     <div id="app">
@@ -60,8 +61,8 @@
                                 <div class="dropdown-menu">
 
                                 <a class="dropdown-item" href="Eventos">Eventos</a>
-                                <a class="dropdown-item" href="Contactos">Mis Contactos</a>
-                                <a class="dropdown-item" href="Listas">Mis Listas</a>
+                                <a class="dropdown-item" href="Contactos">Contactos</a>
+                                <a class="dropdown-item" href="Listas">Listas</a>
                                 <div class="dropdown-divider"></div>
 
                                      <!--BOTON LOGOUT -->
@@ -88,9 +89,12 @@
                 </div>
             </div>
         </nav>
-
+     
+        <center><h1>{{$title}} </h1> </center>
+      
         <main class="py-4">
             @yield('content')
+            
         </main>
     </div>
     <script src="{{ asset('js/jQuery/jquery-3.3.1.min.js') }}"></script>

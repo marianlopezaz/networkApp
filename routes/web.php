@@ -50,4 +50,6 @@ Route::get('/callback', 'Auth\LoginController@handleProviderFacebookCallback');
 
 //data table
 Route::get('/Eventos/datatable', 'EventoController@eventoData')->name('datatable.eventos');
+Route::get('/Contactos/datatable', 'MisContactosController@contactoData')->name('datatable.contactos');
+Route::get('/Listas/datatable', 'MisListasController@listaData')->name('datatable.listas');
 

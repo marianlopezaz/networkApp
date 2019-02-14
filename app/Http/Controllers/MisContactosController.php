@@ -7,6 +7,7 @@ use App\Pais;
 use App\Provincia;
 use App\Prioridad;
 use App\Anotacion;
+use Datatables;
 use Illuminate\Http\Request;
 
 class MisContactosController extends Controller
@@ -38,6 +39,11 @@ class MisContactosController extends Controller
        
        return view('contactos.misContactos',compact('title','contactos'));
    }
+
+   public function contactoData(){
+    $contactos = Contacto::where('user_id','=',Auth::user()->idUsuario);
+    return Datatables::of($contactos)->make(true);
+}
  
 
    public function edicionContacto(Contacto $Contacto)

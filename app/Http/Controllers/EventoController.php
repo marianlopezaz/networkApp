@@ -30,7 +30,7 @@ class EventoController extends Controller
 
     public function index()
     {
-        $title = 'Eventos';
+        $title = 'Mis Eventos';
         
         $eventos = Evento::where('user_id','=',Auth::user()->idUsuario)->get(); 
 

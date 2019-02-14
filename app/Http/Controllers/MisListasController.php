@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Lista;
+use Datatables;
 
 class MisListasController extends Controller
 {
@@ -33,6 +34,11 @@ class MisListasController extends Controller
        $Listas = Lista::where('user_id','=',Auth::user()->idUsuario)->get(); 
        return view('listas.misListas',compact('title','Listas'));
    }
+
+   public function listaData(){
+    $listas = Lista::where('user_id','=',Auth::user()->idUsuario);
+    return Datatables::of($listas)->make(true);
+}
 
    public function nuevaLista()
    {

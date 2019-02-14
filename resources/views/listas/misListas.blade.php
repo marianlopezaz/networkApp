@@ -1,35 +1,17 @@
-@extends ('layouts.app')
+@extends('layouts.app')
+
 @section('content')
 
+            <table id="tableListas" class="table table-bordered" style="width:100%" data-route="{{Route('datatable.listas')}}">
+                                     <thead class="thead-dark">
+                                        <tr>
+                                            <th>Lista De</th>
+                                          
+                                        </tr>
+                                    </thead>
+            </table>
 
-<center><h1>{{$title}}</h1>
-<table colspan="3"  border='1'>
-@forelse ($Listas as $lista)
-
-<tr>
-    <td>{{$lista->nombreLista}} </td> 
-    <td><a href="{{route('lista.detalle',[$lista->idLista])}}">Detalles</a></td>
-    <td><a href="{{route('lista.editar.pagina',[$lista->idLista])}}">Editar</a></td>
-    <td> <form action ="{{route('lista.destroy',[$lista])}}" method="POST">{{method_field('DELETE')}}
-{{csrf_field()}} <input type="submit" class="btn btn-link" value="Eliminar"> </form></td>
-
-</tr>
-
-@empty
-    <li>No hay Listas para mostrar, crea una!.</li>
-
-@endforelse
-</table>
-<table>
-    <tr>
-        <td>
-        <td>
-            <form method="GET" action="/Listas/nueva">
-            <button type="submit" class="btn btn link">Nueva Lista</button>
-            </form>
-        </td>
-    </tr>
-</table>
-<table>
-</center>
+@endsection
+@section('script')
+    <script src="{{ asset('js/jsFiles/listaData.js') }}"></script>
 @endsection
