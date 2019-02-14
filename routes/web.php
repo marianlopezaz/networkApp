@@ -48,3 +48,5 @@ Route::get('/Contactos/Detalle/{Contacto}/eventos','MisContactosController@verEv
 Route::get('/facebook', 'Auth\LoginController@redirectToFacebookProvider');
 Route::get('/callback', 'Auth\LoginController@handleProviderFacebookCallback');
 
+//data table
+Route::get('/Eventos/datatable', 'EventoController@eventosData')->name('dataTable.Eventos');

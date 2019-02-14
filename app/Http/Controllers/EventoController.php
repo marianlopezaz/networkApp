@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Evento;
 use Illuminate\Support\Facades\Auth;
+use Datatables;
 
 class EventoController extends Controller
 {
@@ -36,6 +37,14 @@ class EventoController extends Controller
         return view('eventos.evento',compact('title','eventos'));
 
     }
+
+    public function eventosData()
+    {
+        $eventos = Evento::select(['nombreEvento','fechaEvento','horaEvento','detalleEvento'])->where('user_id','=',Auth::user()->idUsuario);
+        return  Datatables::of($eventos)->make(true);
+    }
+
+
     public function nuevoEvento(){
         $title = 'Nuevo Evento';
         return view('eventos.nuevoEvento',compact('title'));
