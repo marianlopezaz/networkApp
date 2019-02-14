@@ -10,14 +10,17 @@
     <title>NetworkApp - {{$title}}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+     <!-- Styles -->
+     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css" rel="stylesheet">
+    <!-- data table que despliega opciones https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css-->
 </head>
 <body>
     <div id="app">
@@ -89,6 +92,15 @@
         <main class="py-4">
             @yield('content')
         </main>
+    </div>
+    <script src="{{ asset('js/jQuery/jquery-3.3.1.min.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+    @yield('script')
     </div>
 </body>
 </html>

@@ -1,17 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
+       
+            <table id="tableEventos" class="table table-bordered" style="width:100%" data-route="{{Route('datatable.eventos')}}">
+                                     <thead class="thead-dark">
+                                        <tr>
+                                            <th>Nombre del Evento</th>
+                                            <th>fecha</th>
+                                            <th>hora</th>
+                                            <th>detalle</th>
+                                        </tr>
+                                    </thead>
+            </table>
 
-<table id="tableEventos" class='table table-sm table-hover table-responsive monserrat' data-route="{{Route('dataTable.Eventos')}}">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th>Nombre Evento</th>
-                                <th>Fecha Evento</th>
-                                <th>Hora Evento</th>
-                                <th>Detalle Evento</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tbodyEventos">
-                        </tbody>
-                    </table>
+@endsection
+@section('script')
+    <script src="{{ asset('js/jsFiles/eventoData.js') }}"></script>
 @endsection

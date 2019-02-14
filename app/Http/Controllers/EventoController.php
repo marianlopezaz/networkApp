@@ -38,12 +38,10 @@ class EventoController extends Controller
 
     }
 
-    public function eventosData()
-    {
-        $eventos = Evento::select(['nombreEvento','fechaEvento','horaEvento','detalleEvento'])->where('user_id','=',Auth::user()->idUsuario);
-        return  Datatables::of($eventos)->make(true);
+    public function eventoData(){
+        $eventos = Evento::where('user_id','=',Auth::user()->idUsuario)->take(10);
+        return Datatables::of($eventos)->make(true);
     }
-
 
     public function nuevoEvento(){
         $title = 'Nuevo Evento';
