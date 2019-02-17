@@ -32,14 +32,12 @@ class EventoController extends Controller
     {
         $title = 'Mis Eventos';
         
-        $eventos = Evento::where('user_id','=',Auth::user()->idUsuario)->get(); 
-
-        return view('eventos.evento',compact('title','eventos'));
+        return view('eventos.evento',compact('title'));
 
     }
 
     public function eventoData(){
-        $eventos = Evento::where('user_id','=',Auth::user()->idUsuario)->take(10);
+        $eventos = Evento::where('user_id','=',Auth::user()->idUsuario);
         return Datatables::of($eventos)->make(true);
     }
 
@@ -88,7 +86,7 @@ class EventoController extends Controller
             'detalleEvento'=> $data['detalleEvento'],
             'user_id' => $data['user_id'],
              ]);
-            return redirect(route('evento.index'));
+            return \Response::json();
     }
 
 

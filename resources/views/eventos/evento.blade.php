@@ -30,18 +30,29 @@
         id="nuevoEventoModalLabel">Nuevo Evento</h4>
       </div>
       <div class="modal-body">
-       
+        <form id="formNuevoEvento"  data-toggle="validator" role="form"> 
+          <div class="form-group">
+            {{csrf_field()}}
+            <input type="hidden" value="{{Auth::user()->idUsuario}}" name="user_id">
+            <label>Nombre del Evento <input type="text" id="nombreEvento" name="nombreEvento" class="form-control" > </label> <br>
+            <label>Fecha del Evento <input type="date" id="fechaEvento" name="fechaEvento" class="form-control" > </label> <br>
+            <label>Hora del Evento <input type="time" id="horaEvento" name="horaEvento" class="form-control" > </label> <br>
+            <label>Descripcion
+            <textarea id="detalleEvento" name="detalleEvento" placeholder="Agrega una descripcion" class="form-control" ></textarea>
+            </label><br>
+          </div>
       </div>
       <div class="modal-footer">
         <button type="button" 
            class="btn btn-default" 
            data-dismiss="modal">Cerrar</button>
         <span class="pull-right">
-          <button type="button" class="btn btn-primary">
+          <button type="submit" id="agregarNuevoEvento" class="btn btn-primary">
             Agregar
           </button>
         </span>
       </div>
+      </form>
     </div>
   </div>
 </div>
