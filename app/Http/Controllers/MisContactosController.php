@@ -35,9 +35,14 @@ class MisContactosController extends Controller
    public function index()
    {    
        $title = 'Mis Contactos';
-       $contactos = Contacto::where('user_id','=',Auth::user()->idUsuario)->get();
-       
-       return view('contactos.misContactos',compact('title','contactos'));
+       $paises = Pais::all();
+       return view('contactos.misContactos',compact('title','paises'));
+   }
+
+   public function getProv($idPais)
+   {
+      $prov = Provincia::where('pais_id','=',$idPais)->get();
+        return Response()->json($prov);
    }
 
    public function contactoData(){
@@ -138,19 +143,19 @@ public function verEventoContacto(Contacto $Contacto)
                 Anotacion::create([
                     'detalleAnotacion'=>$data['anotacion'],
                     ]);
-                    $anotacion_id = Anotacion::where('detalleAnotacion',$data['anotacion'])->value('idAnotacion');
                 Contacto::create([
                     'nameCont'=> $data['nameCont'],
                     'lastNameCont'=> $data['lastNameCont'],
                     'email'=> $data['email'],
                     'telefono' => $data['telefono'],
                     'provincia_id'=> $provincia_id,
-                    'anotacion_id'=>$anotacion_id,
                     'prioridad_id'=>$prioridad_id,
                     'user_id' => $data['user_id'],
                     ]);
-                    return redirect(route('contacto.index'));
-
+                Anotacion::update([
+                    'contacto_id'=>Contacto::all()->last()->get(),
+                ]);    
+                return \Response::json();
             }
             else{
                 Contacto::create([
@@ -162,8 +167,10 @@ public function verEventoContacto(Contacto $Contacto)
                     'prioridad_id'=>$prioridad_id,
                     'user_id' => $data['user_id'],
                     ]);
-                    return redirect(route('contacto.index'));
+                    return \Response::json();
             }
+
+            
     }
 
 }

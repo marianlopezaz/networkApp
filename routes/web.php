@@ -48,6 +48,10 @@ Route::get('/Contactos/Detalle/{Contacto}/eventos','MisContactosController@verEv
 Route::get('/facebook', 'Auth\LoginController@redirectToFacebookProvider');
 Route::get('/callback', 'Auth\LoginController@handleProviderFacebookCallback');
 
+//Get Provincias
+Route::get('provincias/{idPais}','MisContactosController@getProv');
+
+
 //data table
 Route::get('/Eventos/datatable', 'EventoController@eventoData')->name('datatable.eventos');
 Route::get('/Contactos/datatable', 'MisContactosController@contactoData')->name('datatable.contactos');
