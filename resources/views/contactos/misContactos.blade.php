@@ -32,20 +32,53 @@
           <div class="form-group">
             {{csrf_field()}}
             <input type="hidden" value="{{Auth::user()->idUsuario}}" name="user_id">
-            <label>Nombre<input type="text" id="nombreContacto" name="nombreContacto" class="form-control" > </label> <br>
-            <label>Apellido<input type="text" id="apellidoContacto" name="apellidoContacto" class="form-control" > </label> <br>
-            <label>Email<input type="email" id="emailContacto" name="emailContacto" class="form-control" > </label> <br>
-            <label>Telefono<input type="number" id="telefonoContacto" name="telefonoContacto" class="form-control" > </label> <br>
-            <label>Pais <select type="text" name="paisContacto" id="paisContacto" class="form-control">
-             <option selected="true">Elige un Pais</option>
-              @foreach ($paises as $pais)
-              <option value={{$pais->idPais}}>{{$pais->nombrePais}}</option>
-              @endforeach
-            </select> </label> <br>
 
-            <label>Provincia <select  disabled="disabled" type="text" name="provinciaContacto" id="provinciaContacto" class="form-control">
-            <option selected="true">Elige una Provincia</option>
-            </select> </label> <br>
+            <label>Nombre<input type="text" id="nameCont" name="nameCont" class="form-control" > </label> <br>
+            
+            <label>Apellido<input type="text" id="lastNameCont" name="lastNameCont" class="form-control" > </label> <br>
+            
+            <label>Email<input type="email" id="email" name="email" class="form-control" > </label> <br>
+            
+            <label>Telefono<input type="number" id="telefono" name="telefono" class="form-control" > </label> <br>
+            
+            <label>Pais 
+            
+            <select type="text" name="paisContacto" id="paisContacto" class="form-control">
+            
+              <option selected="true">Elige un Pais</option>
+              
+                @foreach ($paises as $pais)
+              <option value={{$pais->idPais}}>{{$pais->nombrePais}}</option>
+                @endforeach
+              
+            </select> 
+            
+            </label> <br>
+
+            <label>Provincia 
+              <select  disabled="disabled" type="text" name="provinciaContacto" id="provinciaContacto" class="form-control">
+                <option selected="true">Elige una Provincia</option>
+              </select> 
+            </label> <br>
+
+            <label>Lista
+              <select type="text" name="listaContacto" id="listaContacto" class="form-control">
+              <option selected="true">Elige una Lista</option>
+                @foreach ($listas as $lista)
+                <option value={{$lista->idLista}}>{{$lista->nombreLista}}</option>
+                @endforeach
+              </select> 
+            </label> <br>
+
+            <label>Prioridad
+              <select type="text" name="prioridadContacto" id="prioridadContacto" class="form-control">
+              <option selected="true">Seleccionar Prioridad</option>
+                @foreach ($prioridades as $prioridad)
+                <option value={{$prioridad->idPrioridad}}>{{$prioridad->nombrePrioridad}}</option>
+                @endforeach
+              </select> 
+            </label> <br>
+
             <label>Anotacion<input type="text" id="anotacionContacto" name="anotacionContacto" class="form-control" > </label> <br>
             
           </div>

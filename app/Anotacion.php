@@ -9,6 +9,6 @@ class Anotacion extends Model
     protected $table = 'anotacion';
     protected $primaryKey='idAnotacion';
     protected $fillable = [
-        'detalleAnotacion','token',
+        'detalleAnotacion','token', 'contacto_id',
     ];
 }

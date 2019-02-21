@@ -76,7 +76,7 @@ public function crearLista()
         'nombreLista'=> $data['nombreLista'],
         'user_id' => $data['user_id'],
          ]);
-        return redirect(route('lista.index'));
+        return \Response::json();
 }
 
 

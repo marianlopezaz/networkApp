@@ -9,7 +9,7 @@ class Evento extends Model
     protected $table = 'evento';
     protected $primaryKey='idEvento';
     protected $fillable = [
-        'nombreEvento', 'fechaEvento', 'horaEvento', 'detalleEvento','token','user_id',
+        'nombreEvento', 'fechaEvento', 'horaEvento', 'detalleEvento','token','user_id', 'contacto_id'
     ];
 
     public function userId()

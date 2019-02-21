@@ -10,6 +10,13 @@ $(function() {
             app.dataTable = function() {
                 
                 $('#tableEventos').DataTable({
+                    drawCallback: function() {
+                        $('.select2').select2({
+                            placeholder: 'Seleccionar Contacto',
+                            allowClear: true,
+                            theme:'classic'
+                        });     
+                     },
                     responsive: true,
                     bPaginate:true,
                     language: {
@@ -44,6 +51,7 @@ $(function() {
                 });
 
 
+
             }
 
 
@@ -53,6 +61,7 @@ $(function() {
             app.agregarEvento = function (){
                 var url = "/Eventos";
                 var datos = $('#formNuevoEvento').serialize();
+                
                 $.ajax({
                     url: url,
                     method: 'POST',
@@ -73,8 +82,7 @@ $(function() {
             });
             }
 
-
-
+    
            app.init(); 
                  
         })(funcionEvento);

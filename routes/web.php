@@ -15,8 +15,8 @@ Auth::routes();
 //EVENTOS
 Route::get('/', 'EventoController@index');
 Route::get('/Eventos', 'EventoController@index')->name('evento.index');
-Route::get('/Eventos/nuevo', 'EventoController@nuevoEvento');
 Route::post('/Eventos', 'EventoController@crearEvento')->name('evento.crear');
+Route::post('/Eventos/searchContact','EventoController@searchContact')->name('evento.searchContact');
 Route::get('/Eventos/editar/{Evento}', 'EventoController@edicionEvento')->name('evento.editar.pagina');
 Route::put('/Eventos/editar/{Evento}', 'EventoController@editarEvento')->name('evento.editar');
 Route::get('/Eventos/Detalle/{Evento}', 'EventoController@DetalleEventos')->name('evento.detalle');
@@ -25,7 +25,6 @@ Route::delete('/Eventos/{Evento}', 'EventoController@EliminarEventos')->name('ev
 
 //LISTAS
 Route::get('/Listas', 'MisListasController@index')->name('lista.index');
-Route::get('/Listas/nueva','MisListasController@nuevaLista')->name('lista.nueva');
 Route::post('/Listas', 'MisListasController@crearLista')->name('lista.crear');
 Route::get('/Listas/editar/{Lista}', 'MisListasController@edicionLista')->name('lista.editar.pagina');
 Route::put('/Listas/editar/{Lista}', 'MisListasController@editarLista')->name('lista.editar');
@@ -34,7 +33,6 @@ Route::delete('/Listas/{Lista}', 'MisListasController@eliminarLista')->name('lis
 
 //CONTACTOS
 Route::get('/Contactos','MisContactosController@index')->name('contacto.index');
-Route::get('/Contactos/nuevo','MisContactosController@nuevoContacto')->name('contacto.nuevo');
 Route::post('/Contactos','MisContactosController@crearContacto')->name('contacto.crear');
 Route::get('/Contactos/editar/{Contacto}', 'MisContactosController@edicionContacto')->name('contacto.editar.pagina');
 Route::put('/Contactos/editar/{Contacto}', 'MisContactosController@EditarContacto')->name('contacto.editar');

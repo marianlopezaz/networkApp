@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Evento;
 use Illuminate\Support\Facades\Auth;
 use Datatables;
+use Illuminate\Support\Facades\Response;
+use App\Contacto;
 
 class EventoController extends Controller
 {
@@ -31,20 +33,15 @@ class EventoController extends Controller
     public function index()
     {
         $title = 'Mis Eventos';
-        
-        return view('eventos.evento',compact('title'));
+        $contactos = Contacto::where('user_id','=',Auth::user()->idUsuario)->get();
+        return view('eventos.evento',compact('title','contactos'));
 
     }
 
     public function eventoData(){
+      
         $eventos = Evento::where('user_id','=',Auth::user()->idUsuario);
         return Datatables::of($eventos)->make(true);
-    }
-
-    public function nuevoEvento(){
-        $title = 'Nuevo Evento';
-        return view('eventos.nuevoEvento',compact('title'));
-
     }
 
     public function DetalleEventos(Evento $Evento){
@@ -68,6 +65,7 @@ class EventoController extends Controller
     public function crearEvento()
     {
         $data = request()->validate([
+            'contacto_id'=>'',
             'nombreEvento'=>'required',
             'fechaEvento'=>'',
             'horaEvento'=>'',
@@ -85,6 +83,7 @@ class EventoController extends Controller
             'horaEvento'=> $data['horaEvento'],
             'detalleEvento'=> $data['detalleEvento'],
             'user_id' => $data['user_id'],
+            'contacto_id'=>$data['contacto_id'],
              ]);
             return \Response::json();
     }
@@ -115,5 +114,30 @@ class EventoController extends Controller
 
         return redirect()->route('evento.index');
     }
+
+
+    public function searchContact(Request $req)
+    {
+       if($req->ajax())
+       {
+           $output = '';
+          $contactos = Contacto::where('nameCont', 'LIKE', '%'.$req->searchContact.'%','and','user_id','=',Auth::user()->idUsuario)->get();
+
+          if($contactos)
+          {
+               foreach ($contactos as $contacto)
+               {
+                $output.='<tr>'.
+                '<td>'.$contacto->nameCont.'</td>'.
+                '<td>'.$contacto->lastNameCont.'</td>'.
+                '</tr>';
+               }
+          }
+
+
+           return Response($output);
+       }
+    }
+
   
 }

@@ -36,7 +36,7 @@ $(function() {
 
             app.bindings = function (){
 
-                //OYENTE QUE AGREGA EVENTO
+                //OYENTE QUE AGREGA CONTACTO
 
                 $('#agregarNuevoContacto').on("click",function(event){
                     app.agregarContacto();
@@ -48,7 +48,7 @@ $(function() {
                     $.get(`provincias/${event.target.value}`,function(data,state){
                         $("#provinciaContacto").empty();
                         data.forEach(element => {
-                            $("#provinciaContacto").append(`<option value=$(element.idProvincia)> ${element.nombreProvincia}</option>`);
+                            $("#provinciaContacto").append(`<option value=${element.idProvincia}> ${element.nombreProvincia}</option>`);
                         });
                     });
                   });
@@ -64,6 +64,7 @@ $(function() {
             {
                 var url = "/Contactos";
                 var datos = $('#formNuevoContacto').serialize();
+                
                 $.ajax({
                     url: url,
                     method: 'POST',

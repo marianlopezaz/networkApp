@@ -21,7 +21,7 @@
 
 <!--MODAL DE NUEVO EVENTO    -->
 <div class="modal fade" id="nuevoEventoModal" 
-     tabindex="-1" role="dialog" 
+     role="dialog" 
      aria-labelledby="nuevoEventoModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -34,6 +34,15 @@
           <div class="form-group">
             {{csrf_field()}}
             <input type="hidden" value="{{Auth::user()->idUsuario}}" name="user_id">
+            <label>Contacto <br>
+              <select name="contacto_id" id="contacto_id" style="width:150%" class="select2">
+                <option></option>
+                @foreach ($contactos as $contacto)
+                <option value={{$contacto->idContacto}}>{{$contacto->nameCont}} {{$contacto->lastNameCont}}</option>
+                @endforeach
+              </select>
+          
+            </label> <br>
             <label>Nombre del Evento <input type="text" id="nombreEvento" name="nombreEvento" class="form-control" > </label> <br>
             <label>Fecha del Evento <input type="date" id="fechaEvento" name="fechaEvento" class="form-control" > </label> <br>
             <label>Hora del Evento <input type="time" id="horaEvento" name="horaEvento" class="form-control" > </label> <br>

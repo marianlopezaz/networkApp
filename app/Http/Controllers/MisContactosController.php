@@ -5,8 +5,11 @@ use Illuminate\Support\Facades\Auth;
 use App\Contacto;
 use App\Pais;
 use App\Provincia;
+use App\Lista;
 use App\Prioridad;
 use App\Anotacion;
+use App\Contacto_Lista;
+
 use Datatables;
 use Illuminate\Http\Request;
 
@@ -36,7 +39,9 @@ class MisContactosController extends Controller
    {    
        $title = 'Mis Contactos';
        $paises = Pais::all();
-       return view('contactos.misContactos',compact('title','paises'));
+       $listas = Lista::where('user_id','=',Auth::user()->idUsuario)->get();
+       $prioridades= Prioridad::all();
+       return view('contactos.misContactos',compact('title','paises','listas','prioridades')); 
    }
 
    public function getProv($idPais)
@@ -62,15 +67,6 @@ class MisContactosController extends Controller
        $title = "Detalle Contacto";
        return view('contactos.detalleContacto',compact('title','Contacto'));
    }
-
-   public function nuevoContacto(){
-    $title = 'Nuevo Contacto';
-    $paises= Pais::all();
-    $provincias= Provincia::all();
-    $prioridades= Prioridad::all();
-    return view('contactos.nuevoContacto',compact('title','paises','provincias','prioridades'));
-
-}
 
 public function verEventoContacto(Contacto $Contacto)
 {    
@@ -115,62 +111,65 @@ public function verEventoContacto(Contacto $Contacto)
     return redirect()->route('contacto.detalle',['Contacto'=>$Contacto]);
    }
     
-    public function crearContacto()
+    public function crearContacto(Request $request)
     {
-       
+        $data = $request -> all();
+  
         $data = request()->validate([
             'nameCont'=>'',
             'lastNameCont'=>'',
             'email'=>'',
             'telefono' =>'',
-            'provincia'=>'',
-            'prioridad'=>'',
-            'anotacion'=>'',
+            'paisContacto'=>'',
+            'provinciaContacto'=>'',
+            'listaContacto'=>'',
+            'prioridadContacto'=>'',
+            'anotacionContacto'=>'',
             'user_id' =>'required',
             
-        ],
-        [
-            'nameCont.required'=>'El campo nombre es obligatorio',
-            'lastNameCont.required'=>'El campo Apellido es obligatorio',
-          
-         
         ]);
 
-            $provincia_id = Provincia::where('nombreProvincia',$data['provincia'])->value('idProvincia');
-            $prioridad_id = Prioridad::where('nombrePrioridad',$data['prioridad'])->value('idPrioridad');
-
-            if(isset($data['anotacion'])){
-                Anotacion::create([
-                    'detalleAnotacion'=>$data['anotacion'],
+            if(isset($data['anotacionContacto'])){
+                $anotacion = Anotacion::create([
+                    'detalleAnotacion'=>$data['anotacionContacto'],
                     ]);
-                Contacto::create([
+        $contacto = Contacto::create([
                     'nameCont'=> $data['nameCont'],
                     'lastNameCont'=> $data['lastNameCont'],
                     'email'=> $data['email'],
                     'telefono' => $data['telefono'],
-                    'provincia_id'=> $provincia_id,
-                    'prioridad_id'=>$prioridad_id,
+                    'provincia_id'=>$data['provinciaContacto'],
+                    'prioridad_id'=>$data['prioridadContacto'],
                     'user_id' => $data['user_id'],
                     ]);
-                Anotacion::update([
-                    'contacto_id'=>Contacto::all()->last()->get(),
-                ]);    
-                return \Response::json();
+                $anotacion->contacto_id = $contacto->idContacto;  
+                $anotacion->save();
+               
             }
             else{
-                Contacto::create([
+        
+        $contacto =  Contacto::create([
                     'nameCont'=> $data['nameCont'],
                     'lastNameCont'=> $data['lastNameCont'],
                     'email'=> $data['email'],
                     'telefono' => $data['telefono'],
-                    'provincia_id'=> $provincia_id,
-                    'prioridad_id'=>$prioridad_id,
+                    'provincia_id'=>$data['provinciaContacto'],
+                    'prioridad_id'=>$data['prioridadContacto'],
                     'user_id' => $data['user_id'],
                     ]);
-                    return \Response::json();
-            }
 
+                   
+            }
             
+        if(isset($data['listaContacto'])){
+            Contacto_Lista::create([
+                'contacto_id'=> $contacto->idContacto,
+                'lista_id'=>$data['listaContacto'],
+            ]);
+        }
+
+            return \Response::json();
+
     }
 
 }

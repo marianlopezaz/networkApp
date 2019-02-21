@@ -27,21 +27,28 @@
         id="nuevaListaModalLabel">Nueva Lista</h4>
       </div>
       <div class="modal-body">
-       
+      <form id="formNuevaLista"  data-toggle="validator" role="form"> 
+          <div class="form-group">
+            {{csrf_field()}}
+            <input type="hidden" value="{{Auth::user()->idUsuario}}" name="user_id">
+            <label>Nombre de la Lista <input type="text" id="nombreLista" name="nombreLista" class="form-control" > </label> <br>
+          </div>
       </div>
       <div class="modal-footer">
         <button type="button" 
            class="btn btn-default" 
            data-dismiss="modal">Cerrar</button>
         <span class="pull-right">
-          <button type="button" class="btn btn-primary">
+          <button type="submit" id="agregarNuevaLista" class="btn btn-primary">
             Agregar
           </button>
         </span>
       </div>
+      </form>
+      </div>
     </div>
   </div>
-</div>
+
 @endsection
 @section('script')
     <script src="{{ asset('js/jsFiles/listaData.js') }}"></script>
